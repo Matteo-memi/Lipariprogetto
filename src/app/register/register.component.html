@@ -1,20 +1,76 @@
-<div class="container">
-    <h2>Register</h2>
-    <form (ngSubmit)="register()">
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" class="form-control" id="username" name="username" [(ngModel)]="username" required>
+<div class="container mt-5">
+  <h2>Registrati</h2>
+  <form (ngSubmit)="onRegister(registerForm)" #registerForm="ngForm">
+    <div class="mb-3">
+      <label for="email" class="form-label">E-mail</label>
+      <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" required>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Registrati come:</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="roleCustomer" [(ngModel)]="role" name="role" value="customer" checked>
+        <label class="form-check-label" for="roleCustomer">Customer</label>
       </div>
-      <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email" required>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="roleEntertainer" [(ngModel)]="role" name="role" value="entertainer">
+        <label class="form-check-label" for="roleEntertainer">Entertainer</label>
       </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password" required>
+    </div>
+
+    <div *ngIf="role === 'customer'">
+      <h3>Dati personali</h3>
+      <div class="mb-3">
+        <label for="name" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="name" name="name" required>
       </div>
-      <button type="submit" class="btn btn-primary">Register</button>
-      <p *ngIf="errorMessage" class="text-danger mt-3">{{ errorMessage }}</p>
-    </form>
-  </div>
-  
+      <div class="mb-3">
+        <label for="surname" class="form-label">Cognome</label>
+        <input type="text" class="form-control" id="surname" [(ngModel)]="surname" name="surname" required>
+      </div>
+      <div class="mb-3">
+        <label for="taxIdCode" class="form-label">Codice Fiscale</label>
+        <input type="text" class="form-control" id="taxIdCode" [(ngModel)]="taxIdCode" name="taxIdCode" required>
+      </div>
+      <div class="mb-3">
+        <label for="city" class="form-label">Città</label>
+        <input type="text" class="form-control" id="city" [(ngModel)]="city" name="city" required>
+      </div>
+      <div class="mb-3">
+        <label for="phone" class="form-label">Telefono</label>
+        <input type="text" class="form-control" id="phone" [(ngModel)]="phone" name="phone" required>
+      </div>
+      <div class="mb-3">
+        <label for="gender" class="form-label">Genere</label>
+        <select class="form-control" id="gender" [(ngModel)]="gender" name="gender" required>
+          <option value="M">Maschio</option>
+          <option value="F">Femmina</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="birthDate" class="form-label">Data di Nascita</label>
+        <input type="date" class="form-control" id="birthDate" [(ngModel)]="birthDate" name="birthDate" required>
+      </div>
+    </div>
+
+    <div *ngIf="role === 'entertainer'">
+      <h3>Dati Artista</h3>
+      <div class="mb-3">
+        <label for="stageName" class="form-label">Nome d'Arte</label>
+        <input type="text" class="form-control" id="stageName" [(ngModel)]="stageName" name="stageName" required>
+      </div>
+      <div class="mb-3">
+        <label for="type" class="form-label">Tipo</label>
+        <input type="text" class="form-control" id="type" [(ngModel)]="type" name="type" required>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Registrati</button>
+    <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+  </form>
+</div>

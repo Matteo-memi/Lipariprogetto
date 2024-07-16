@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -7,23 +7,30 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8080/auth'; // immagino sia da sostituire
 
-  constructor(private http: HttpClient) {}
+  private baseUrl = 'http://localhost:8080/auth'; // Base URL del backend
 
-  login(username: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/login`, { username, password }).pipe(
-      catchError(error => {
-        return throwError(error);
-      })
+  constructor(private http: HttpClient) { }
+
+  login(email: string, password: string): Observable<any> {
+    const url = `${this.baseUrl}/login`;
+    console.log('Login request:', { email, password }); // Logging della richiesta
+    return this.http.post(url, { email, password }).pipe(
+      catchError(this.handleError)
     );
   }
 
-  register(username: string, email: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/register`, { username, email, password }).pipe(
-      catchError(error => {
-        return throwError(error);
-      })
+  register(user: any): Observable<any> {
+    const url = `${this.baseUrl}/register`;
+    console.log('Register request:', user); // Logging della richiesta
+    return this.http.post(url, user).pipe(
+      catchError(this.handleError)
     );
+  }
+
+  private handleError(error: any) {
+    console.error('Errore nel servizio Auth:', error);
+    return throwError(error);
   }
 }
+

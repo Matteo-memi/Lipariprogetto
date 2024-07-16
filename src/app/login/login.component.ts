@@ -8,21 +8,25 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  username: string = '';
+  email: string = '';
   password: string = '';
   errorMessage: string = '';
+  successMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
-  login(): void {
-    this.authService.login(this.username, this.password).subscribe(
-      (response) => {
-        console.log('Login successful:', response);
-        this.router.navigate(['/home']);
+  onLogin(): void {
+    this.authService.login(this.email, this.password).subscribe(
+      response => {
+        this.successMessage = 'Login effettuato con successo!';
+        this.errorMessage = '';
+        setTimeout(() => {
+          this.router.navigate(['/']);
+        }, 2000); // Reindirizza alla home dopo 2 secondi
       },
-      (error) => {
-        console.error('Error during login:', error);
-        this.errorMessage = 'Credenziali non valide. Per favore riprova.';
+      error => {
+        this.errorMessage = 'Errore durante il login. Controlla le tue credenziali.';
+        this.successMessage = '';
       }
     );
   }

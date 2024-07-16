@@ -1,16 +1,22 @@
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  
-  main {
-    flex: 1;
-  }
-  
+/* styles.css */
+
+/* Imposta altezza minima del corpo per occupare l'intera altezza della finestra */
+body, html {
+  min-height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1; /* Questo fa sì che il contenuto principale occupi lo spazio rimanente */
+}
+
+footer {
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 10px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}

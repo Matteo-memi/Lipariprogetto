@@ -1,14 +1,25 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Lipariticket</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="eventDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            All Events
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="eventDropdown">
+            <li *ngFor="let category of eventCategories"><a class="dropdown-item" href="#">{{ category }}</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="cityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            All Cities
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="cityDropdown">
+            <li *ngFor="let city of cities"><a class="dropdown-item" href="#">{{ city }}</a></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/login">Accedi</a>
@@ -18,5 +29,5 @@
         </li>
       </ul>
     </div>
-  </nav>
-  
+  </div>
+</nav>
